@@ -1,5 +1,6 @@
 const express = require('express');
 const logger = require('../lib/logger');
+const departmentRouter = require('./department');
 
 const router = express.Router();
 
@@ -19,5 +20,7 @@ router.get('/log-test', (req, res, next) => {
 
   res.send('log test');
 });
+
+router.use('/departments', departmentRouter);
 
 module.exports = router;
