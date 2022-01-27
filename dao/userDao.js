@@ -58,7 +58,7 @@ const dao = {
       User.findByPk(
         params.id,
         {
-          attributes: { exclude: ['password'] },
+          attributes: { exclude: ['password'] }, // password 필드 제외
           include: [
             {
               model: Department,
@@ -96,6 +96,20 @@ const dao = {
         where: { id: params.id },
       }).then((deleted) => {
         resolve({ deletedCount: deleted });
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+
+  // 로그인을 위한 사용자 조회
+  selectUser(params) {
+    return new Promise((resolve, reject) => {
+      User.findOne({
+        attributes: ['id', 'userid', 'password', 'name', 'role'],
+        where: { userid: params.userid },
+      }).then((selectedOne) => {
+        resolve(selectedOne);
       }).catch((err) => {
         reject(err);
       });
