@@ -39,4 +39,22 @@ router.post('/', isLoggedIn, async (req, res) => {
   }
 });
 
+// 리스트 조회
+router.get('/', isLoggedIn, async (req, res) => {
+  try {
+    const params = {
+      name: req.query.name,
+    };
+    logger.info(`(device.list.params) ${JSON.stringify(params)}`);
+
+    const result = await deviceService.list(params);
+    logger.info(`(device.list.result) ${JSON.stringify(result)}`);
+
+    // 최종 응답
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ err: err.toString() });
+  }
+});
+
 module.exports = router;

@@ -21,6 +21,24 @@ const service = {
       resolve(inserted);
     });
   },
+  // selectList
+  async list(params) {
+    let result = null;
+
+    try {
+      result = await deviceDao.selectList(params);
+      logger.debug(`(deviceService.list) ${JSON.stringify(result)}`);
+    } catch (err) {
+      logger.error(`(deviceService.list) ${err.toString()}`);
+      return new Promise((resolve, reject) => {
+        reject(err);
+      });
+    }
+
+    return new Promise((resolve) => {
+      resolve(result);
+    });
+  },
 };
 
 module.exports = service;
