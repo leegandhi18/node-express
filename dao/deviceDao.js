@@ -36,6 +36,18 @@ const dao = {
       });
     });
   },
+  // 상세정보 조회
+  selectInfo(params) {
+    return new Promise((resolve, reject) => {
+      Device.findByPk(
+        params.id,
+      ).then((selectedInfo) => {
+        resolve(selectedInfo);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
 };
 
 module.exports = dao;

@@ -57,4 +57,22 @@ router.get('/', isLoggedIn, async (req, res) => {
   }
 });
 
+// 상세정보 조회
+router.get('/:id', isLoggedIn, async (req, res) => {
+  try {
+    const params = {
+      id: req.params.id,
+    };
+    logger.info(`(device.info.params) ${JSON.stringify(params)}`);
+
+    const result = await deviceService.info(params);
+    logger.info(`(device.info.result) ${JSON.stringify(result)}`);
+
+    // 최종 응답
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ err: err.toString() });
+  }
+});
+
 module.exports = router;
