@@ -75,6 +75,24 @@ const service = {
       resolve(result);
     });
   },
+  // delete
+  async delete(params) {
+    let result = null;
+
+    try {
+      result = await deviceDao.delete(params);
+      logger.debug(`(deviceService.delete) ${JSON.stringify(result)}`);
+    } catch (err) {
+      logger.error(`(deviceService.delete) ${err.toString()}`);
+      return new Promise((resolve, reject) => {
+        reject(err);
+      });
+    }
+
+    return new Promise((resolve) => {
+      resolve(result);
+    });
+  },
 };
 
 module.exports = service;

@@ -101,4 +101,22 @@ router.put('/:id', isLoggedIn, async (req, res) => {
   }
 });
 
+// 삭제
+router.delete('/:id', isLoggedIn, async (req, res) => {
+  try {
+    const params = {
+      id: req.params.id,
+    };
+    logger.info(`(device.delete.params) ${JSON.stringify(params)}`);
+
+    const result = await deviceService.delete(params);
+    logger.info(`(device.delete.result) ${JSON.stringify(result)}`);
+
+    // 최종 응답
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ err: err.toString() });
+  }
+});
+
 module.exports = router;

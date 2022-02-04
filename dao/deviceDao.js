@@ -63,6 +63,18 @@ const dao = {
       });
     });
   },
+  // 삭제
+  delete(params) {
+    return new Promise((resolve, reject) => {
+      Device.destroy({
+        where: { id: params.id },
+      }).then((deleted) => {
+        resolve({ deletedCount: deleted });
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
 };
 
 module.exports = dao;
