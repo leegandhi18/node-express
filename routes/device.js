@@ -75,4 +75,30 @@ router.get('/:id', isLoggedIn, async (req, res) => {
   }
 });
 
+// 수정
+router.put('/:id', isLoggedIn, async (req, res) => {
+  try {
+    const params = {
+      id: req.params.id,
+      name: req.body.name,
+      deviceModelName: req.body.deviceModelName,
+      manufacturer: req.body.manufacturer,
+      location: req.body.location,
+      edgeSerialNumber: req.body.edgeSerialNumber,
+      networkInterface: req.body.networkInterface,
+      networkConfig: req.body.networkConfig,
+      description: req.body.description,
+    };
+    logger.info(`(device.update.params) ${JSON.stringify(params)}`);
+
+    const result = await deviceService.edit(params);
+    logger.info(`(device.update.result) ${JSON.stringify(result)}`);
+
+    // 최종 응답
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ err: err.toString() });
+  }
+});
+
 module.exports = router;

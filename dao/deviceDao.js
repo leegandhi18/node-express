@@ -48,6 +48,21 @@ const dao = {
       });
     });
   },
+  // 수정
+  update(params) {
+    return new Promise((resolve, reject) => {
+      Device.update(
+        params,
+        {
+          where: { id: params.id },
+        },
+      ).then(([updated]) => {
+        resolve({ updatedCount: updated });
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
 };
 
 module.exports = dao;

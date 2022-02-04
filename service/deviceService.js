@@ -57,6 +57,24 @@ const service = {
       resolve(result);
     });
   },
+  // update
+  async edit(params) {
+    let result = null;
+
+    try {
+      result = await deviceDao.update(params);
+      logger.debug(`(deviceService.edit) ${JSON.stringify(result)}`);
+    } catch (err) {
+      logger.error(`(deviceService.edit) ${err.toString()}`);
+      return new Promise((resolve, reject) => {
+        reject(err);
+      });
+    }
+
+    return new Promise((resolve) => {
+      resolve(result);
+    });
+  },
 };
 
 module.exports = service;
