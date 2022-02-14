@@ -8,10 +8,16 @@ const departmentService = require('../service/departmentService');
 // 등록
 router.post('/', isLoggedIn, async (req, res) => {
   try {
+    // const params = {
+    //   name: req.body.name,
+    //   code: req.body.code,
+    //   description: req.body.description,
+    // };
+    const { name, code, description } = req.body;
     const params = {
-      name: req.body.name,
-      code: req.body.code,
-      description: req.body.description,
+      name,
+      code,
+      description,
     };
     logger.info(`(department.reg.params) ${JSON.stringify(params)}`);
 

@@ -122,7 +122,7 @@ const service = {
 
       // 해당 사용자가 없는 경우 튕겨냄
       if (!user) {
-        const err = new Error('Incorect userid or password');
+        const err = new Error('Incorrect userid or password');
         logger.error(err.toString());
 
         return new Promise((resolve, reject) => {
@@ -142,7 +142,7 @@ const service = {
 
       // 비밀번호 틀린 경우 튕겨냄
       if (!checkPassword) {
-        const err = new Error('Incorect userid or password');
+        const err = new Error('Incorrect userid or password');
         logger.error(err.toString());
 
         return new Promise((resolve, reject) => {

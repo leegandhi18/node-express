@@ -8,9 +8,14 @@ const userService = require('../service/userService');
 // user 토큰 발행
 router.post('/token', async (req, res) => {
   try {
+    // const params = {
+    //   userid: req.body.userid,
+    //   password: req.body.password,
+    // };
+    const { userid, password } = req.body;
     const params = {
-      userid: req.body.userid,
-      password: req.body.password,
+      userid,
+      password,
     };
     logger.info(`(auth.token.params) ${JSON.stringify(params)}`);
 
